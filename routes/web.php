@@ -65,6 +65,15 @@ Route::middleware('auth')->group(function() {
 
                 Route::get('maintenance/unit/{id}/dispose', 'SysMaintenanceUnitController@disposeVehicle');
                 Route::get('maintenance/unit/{id}/undispose', 'SysMaintenanceUnitController@undisposeVehicle');
+
+                //Role Route
+                Route::get('/role-maintenance','RoleMaintenanceController@index')->name('role');
+                Route::post('/role-maintenance','RoleMaintenanceController@updateRole')->name('role.update');
+
+                //Permission Route
+                Route::get('/permission-maintenance','PermissionMaintenanceController@index')->name('permission');
+                Route::post('/permission-maintenance','PermissionMaintenanceController@updatePermission')->name('permission.update');                
+
             });
         });
     });

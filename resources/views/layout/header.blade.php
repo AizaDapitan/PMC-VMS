@@ -167,7 +167,9 @@
 											<li><a href="{{route('vehicle.report.vms_vehicles')}}"><i class="fa fa-user"></i> VMS List of Vehicles</a></li>
 											<li><a href="{{route('vehicle.report.fms_vehicles')}}"><i class="fa fa-users"></i> FMS List of Vehicles</a></li>
 										</ul>
-									</li>									
+									</li>
+									<li><a href="{{route('maintenance.role')}}"><i class="fa fa-file"></i> Role Maintenance</a></li>
+									<li><a href="{{route('maintenance.permission')}}"><i class="fa fa-file"></i> Permission Maintenance</a></li>
 								</ul>
 
 							</div>
