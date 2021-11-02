@@ -45,8 +45,9 @@ Route::middleware('auth')->group(function() {
     Route::get('/maintenance', 'HomeController@maintenance')->name('form.maintenance');
 
     //Admin only page
-    Route::middleware('permission')->group(function() {
-        Route::prefix('maintenance')->group(function () {
+    // Route::middleware('permission')->group(function() {
+    //     Route::prefix('maintenance')->group(function () {
+
             Route::name('maintenance.')->group(function() {
                 Route::resource('/unit','SysMaintenanceUnitController');
                 Route::resource('/status','SysMaintenanceStatusController');
@@ -72,11 +73,25 @@ Route::middleware('auth')->group(function() {
 
                 //Permission Route
                 Route::get('/permission-maintenance','PermissionMaintenanceController@index')->name('permission');
-                Route::post('/permission-maintenance','PermissionMaintenanceController@updatePermission')->name('permission.update');                
+                Route::post('/permission-maintenance','PermissionMaintenanceController@updatePermission')->name('permission.update'); 
+                
+                //Role Access right routes
+                Route::group(['prefix' => 'roleaccessrights'], function () {
+                    Route::get('/', 'RoleRightController@index')->name('roleaccessrights.index');
+                    Route::post('store', 'RoleRightController@store')->name('roleaccessrights.store');
+                    Route::get('store', 'RoleRightController@store')->name('roleaccessrights.store');
+                });
+
+                //User Access right routes
+                Route::group(['prefix' => 'useraccessrights'], function () {
+                    Route::get('/', 'UserRightController@index')->name('useraccessrights.index');
+                    Route::post('store', 'UserRightController@store')->name('useraccessrights.store');
+                    Route::get('store', 'UserRightController@store')->name('useraccessrights.store');
+                });
 
             });
-        });
-    });
+        //});
+    //});
     
 
     //Downtime

@@ -41,7 +41,9 @@
 						</div>
 					</div>
 				</div>
-				
+
+				@if( Auth::user()->role == 'admin')								
+
 				<div class="tile bg-purple selected" onclick="window.location.href='{{ route('form.maintenance')}}'">
 					<div class="corner"> </div>
 					<div class="tile-body">
@@ -52,7 +54,9 @@
 							System Maintenance
 						</div>
 					</div>
-				</div>				
+				</div>
+
+				@endif
 
 				<div class="tile bg-green selected" onclick='window.open("{{ route('maintenance.export', 'raw_data') }}","displayWindow","toolbar=no,scrollbars=yes,width=1200,height=500");'>
 					<div class="corner"> </div>

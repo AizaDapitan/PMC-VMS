@@ -134,7 +134,9 @@
 					</li>
 				</ul>
 			</li>
-			
+
+			@if (Auth::user()->role == 'admin')
+
 			<li>
 				<a>|</a>
 			</li>
@@ -177,7 +179,9 @@
 					</li>
 				</ul>
 			</li>
-					
+		
+			@endif
+
 			<!-- <li class="classic-menu-dropdown">
 				<a href="#" onclick='window.open("maintenance/export.php?act=raw_data&startDate=2018-01-01&endDate=","displayWindow","toolbar=no,scrollbars=yes,width=1200,height=500");'>
 				<i class="fa fa-file-text-o"></i> Reports
