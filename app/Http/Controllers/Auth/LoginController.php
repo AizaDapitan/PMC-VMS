@@ -71,12 +71,12 @@ class LoginController extends Controller
     }
     public function adminLogin()
     {
-        return view('auth.adminlogin');
+        return view('admin.login.adminlogin');
     }
     public function adminSubmit(Request $request)
     {
         $checker = auth()->attempt([
-            'username' => $request->username,
+            'domain' => $request->username,
             'password' => $request->password,
             'active' => 1,
         ]);

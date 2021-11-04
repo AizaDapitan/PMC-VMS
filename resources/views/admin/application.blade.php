@@ -86,7 +86,12 @@
                                         <div class="col-md-12">
                                             <label class="control-label">Time</label><i class="font-red"> *</i>
                                             @if(isset($applications))
-                                                <input required type="time" class="form-control" name="scheduled_time" id="scheduled_time" value="{{$applications->scheduled_time}}" />
+                                                <?php
+                                                    $schedule_time = $applications['scheduled_time'];
+                                                    $schedule_time = str_replace(':00.0000000','',$schedule_time);
+                                                ?>
+                                                <input required type="time" class="form-control" name="scheduled_time" id="scheduled_time" value="{{$schedule_time}}" />
+                                                
                                             @else
                                                 <input required type="time" name="scheduled_time" class="form-control" id="scheduled_time" />
                                             @endif                                            
@@ -117,7 +122,7 @@
                                                 <span class="glyphicon glyphicon-send"></span> Submit
                                             </button>
                                         @endif                                        
-
+                
                                     </div>
                                 </div>
                             </form>
@@ -281,9 +286,10 @@
 <script type="text/javascript">
 
     $(document).ready(function(){                
-            
         });
     
+
+
           function systemDown(id) {
           $.ajax({
               url: '{!! route('maintenance.application.systemDown') !!}',

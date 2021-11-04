@@ -3,27 +3,28 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8"/>
-<title>ECS Vehicle Request</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="" name="description"/>
-<meta content="" name="author"/>
+    <meta charset="utf-8" />
+    <title>ECS Vehicle Request</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
 
 
-<!-- BEGIN GLOBAL MANDATORY STYLES -->
-@include('layout.head.styles.globalstyles')
-<!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    @include('layout.head.styles.globalstyles')
+    <!-- END GLOBAL MANDATORY STYLES -->
 
-<link href="{{ asset('metronic/assets/global/plugins/select2/select2.css') }}" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('metronic/assets/admin/pages/css/login-soft.css') }}" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('metronic/assets/global/css/components.css') }}" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('metronic/assets/global/css/plugins.css') }}" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('metronic/assets/admin/layout/css/layout.css') }}" rel="stylesheet" type="text/css"/>
-<link id="style_color" href="{{ asset('metronic/assets/admin/layout/css/themes/default.css') }}" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('metronic/assets/admin/layout/css/custom.css') }}" rel="stylesheet" type="text/css"/>
-<!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+    <link href="{{ asset('metronic/assets/global/plugins/select2/select2.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('metronic/assets/admin/pages/css/login-soft.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('metronic/assets/global/css/components.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('metronic/assets/global/css/plugins.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('metronic/assets/admin/layout/css/layout.css') }}" rel="stylesheet" type="text/css" />
+    <link id="style_color" href="{{ asset('metronic/assets/admin/layout/css/themes/default.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('metronic/assets/admin/layout/css/custom.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    
 </head>
 
 <body class="login">
@@ -40,8 +41,9 @@
     </div>
 
     <!-- Content -->
-    
+
     <div class="content">
+       
         @yield('content')
     </div>
 
@@ -83,33 +85,34 @@
     <script src="{{ asset('metronic/assets/admin/pages/scripts/login-soft.js') }}" type="text/javascript"></script>
     <!-- END PAGE LEVEL SCRIPTS -->
     <script>
-            jQuery(document).ready(function() {     
-                Metronic.init(); // init metronic core components
-                Layout.init(); // init current layout
-                QuickSidebar.init() // init quick sidebar
-                Login.init();
+        jQuery(document).ready(function() {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+            QuickSidebar.init() // init quick sidebar
+            Login.init();
 
-                // init background slide images
-                $.backstretch([
-                    "{{ asset('metronic/assets/admin/pages/media/bg/1.jpg') }}",
-                    "{{ asset('metronic/assets/admin/pages/media/bg/2.jpg') }}",
-                    "{{ asset('metronic/assets/admin/pages/media/bg/3.jpg') }}",
-                    "{{ asset('metronic/assets/admin/pages/media/bg/4.jpg') }}"
-                    ], {
-                    fade: 1000,
-                    duration: 8000
-                    }
-                );
+            // init background slide images
+            $.backstretch([
+                "{{ asset('metronic/assets/admin/pages/media/bg/1.jpg') }}",
+                "{{ asset('metronic/assets/admin/pages/media/bg/2.jpg') }}",
+                "{{ asset('metronic/assets/admin/pages/media/bg/3.jpg') }}",
+                "{{ asset('metronic/assets/admin/pages/media/bg/4.jpg') }}"
+            ], {
+                fade: 1000,
+                duration: 8000
             });
-        </script>
-        <script>
-            jQuery('#noaccount').click(function () {
-                jQuery('.login-form').hide();
-                jQuery('.forget-form').show();
-            });
+        });
+    </script>
+    <script>
+        jQuery('#noaccount').click(function() {
+            jQuery('.login-form').hide();
+            jQuery('.forget-form').show();
+        });
 
-        </script>
+        
+    </script>
     <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
+
 </html>

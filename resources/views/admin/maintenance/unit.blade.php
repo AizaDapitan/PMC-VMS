@@ -12,6 +12,7 @@
                         <i class="fa fa-car"></i>Unit
                     </div>
                 </div>
+                                
                 <div class="portlet-body">
                     <div class="portlet-tabs">
                         <ul class="nav nav-tabs">
@@ -26,6 +27,7 @@
                                 </a>
                             </li>
                         </ul>
+
                         <div class="tab-content">
                             {{-- CONTENT TAB #1 --}}
                             <div class="tab-pane active" id="portlet_tab1">
@@ -38,11 +40,35 @@
                                             <label>Search Plate No </label>
                                             <input type="" name="plateno" id="plateno">
                                             <button type="submit" class="btn-primary" style="height: 26px; border: 0.2px;"><i class="fa fa-search"></i></button>
-                                            </span>
-                                                
-                                            
+                                            </span>                                                                                                                                        
                                         </div>
                                     </div>
+
+                                    @if(Session::has('success'))
+
+                                    <script>
+                                        setTimeout(function(){ $('#success').fadeOut();
+                                        }, 3000 );
+                                    </script>
+                                    <div id="success" class="alert alert-success alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <strong><span class="fa fa-check-square-o"></span> Success!</strong> {{ Session::get('success') }}
+                                    </div>
+
+                                    @endif
+
+                                    @if(Session::has('error'))
+
+                                    <script>
+                                        setTimeout(function(){ $('#error').fadeOut();
+                                        }, 3000 );
+                                    </script>
+                                    <div id="error" class="alert alert-danger alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <strong><span class="fa fa-warning"></span> Error!</strong> {{ Session::get('error') }}
+                                    </div>
+
+                                    @endif                                    
                                 </form>
                                 <div>
                                     {{-- DISPLAY ON EDIT --}}
@@ -56,6 +82,7 @@
                                                     <i class="fa fa-edit"></i>Update Unit
                                                 </div>
                                             </div>
+
                                             <div class="portlet-body"><br><br>
                                                 <div class="row">
                                                     <div class="col-md-12 margin-bottom-10">

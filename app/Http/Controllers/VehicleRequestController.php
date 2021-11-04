@@ -48,7 +48,6 @@ class VehicleRequestController extends Controller
         $localDept = Department::get();
         $hrisDept = HRISAgusanDepartment::select(DB::raw('DISTINCT DeptDesc as name'))->orderBy('DeptDesc', 'asc')->get();
         $departments = array_merge($localDept->toArray(), $hrisDept->toArray());
-
         if(Auth::user()->role!='requestor') {
             $requests = VehicleRequest::orderBy('id', 'desc')
             ->with([

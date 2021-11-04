@@ -138,16 +138,13 @@
                                         <div class="col-md-6">
 
                                             @if(isset($domain))
-
-                                            <label class="control-label">Domain</label>
-                                            <input required type="text" class="form-control" name="domain" value="{{$domain}}">
-
-
+                                                <label class="control-label">Domain</label>
+                                                <input type="text" class="form-control" name="domain" value="{{$domain}}" required maxlength="30">
                                             @else
-
-                                            <label class="control-label">Domain</label>
-                                            <input required type="text" class="form-control" name="domain">
+                                                <label class="control-label">Domain</label>
+                                                <input type="text" class="form-control" name="domain" required maxlength="30">
                                             @endif
+
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">Role</label>

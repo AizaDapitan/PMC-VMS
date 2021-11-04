@@ -7,6 +7,7 @@ use App\Department;
 use App\HRISAgusanDepartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class SysMaintenanceUnitController extends Controller
@@ -97,6 +98,7 @@ class SysMaintenanceUnitController extends Controller
             'vehicle_code'=> $request->get('vehicle_code_new'),
         ]);
 
+        Session::flash('success'," Unit Created Successfully...");
         return redirect()->back();
     }
 
@@ -151,7 +153,11 @@ class SysMaintenanceUnitController extends Controller
         $unit->dept = request()->get('department');
         $unit->save();
 
-        return redirect()->back();
+        //Session::flash('success'," Unit has been updated");
+        //return redirect()->back();
+
+        return redirect()->route('maintenance.unit.index')->with('success', 'Unit has been updated!!');
+        
     }
 
     /**
