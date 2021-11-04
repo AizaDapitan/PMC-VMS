@@ -20,6 +20,7 @@ class SearchController extends Controller
         $query = $req->get('query');
 
         $dataAgusan = HRISAgusanEmployee::where('EmpID','like',"%$query%")->orWhere('FullName','LIKE',"%$query%")->where('Active','=','1')->with(['posDetails','comDetails','deptDetails'])->get();
+       
         $dataDavao  = HRISDavaoEmployee::where('EmpID','like',"%$query%")->orWhere('FullName','LIKE',"%$query%")->where('Active','=','1')->with(['posDetails','comDetails','deptDetails'])->get();
 
          $mergedData = array_merge($dataAgusan->toArray(), $dataDavao->toArray());
@@ -27,8 +28,7 @@ class SearchController extends Controller
 
         $output = '<ul class="dropdown-menu wd-100p" style="display:block; position:relative">';
 
-        $data = [];
-
+        $data = [];  
         foreach($mergedData as $rs) {
                         
             $output .= "<li class='emp_list'><a href='#'>".$rs['EmpID'].': '.$rs['FullName']."<span style='display:none;'>=".$rs['EmpID']."=".$rs['FName']."=".$rs['MName']."=".$rs['LName']."=".$rs['com_details']['CompanyName']."=".$rs['dept_details']['DeptDesc']."=".$rs['pos_details']['PositionDesc']."=".$rs['FullName']."</span></a></li>";

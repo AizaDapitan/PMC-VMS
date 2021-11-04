@@ -46,11 +46,11 @@ class UserRightController extends Controller
 
         $users =  $this->userService->all()
         ->where('active', '1')
-        ->where('username', '<>', '')
+        ->where('domain', '<>', '')
         ->where('role', '<>', 'ADMIN')
         ->where('role', '<>', 'admin')
         ->where('role', '<>', 'Admin')        
-        ->sortBy('username');
+        ->sortBy('domain');
         $permissions = $this->permissionService->all()->where('active', '1')->sortBy('description');
         $modules = $this->permissionService->getModule()->sortBy('description');
                

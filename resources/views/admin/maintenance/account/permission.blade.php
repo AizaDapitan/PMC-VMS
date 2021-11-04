@@ -95,7 +95,7 @@
                                         <div class="col-md-12">
                                             <label class="control-label">Description <span class="required" aria-required="true"> * </span></label>                                                                                    
                                             @if(isset($permissions))
-                                                <input type="text" class="form-control" name="description" id="description" required maxlength="50" value="{{$permissions->description}}">
+                                                <input type="text" class="form-control" name="description" id="description" required maxlength="50" value="{{$permissions->description}}"/>
                                             @else
                                                 <input type="text" placeholder="Description" name="description" id="description" class="form-control" required maxlength="50" />
                                             @endif

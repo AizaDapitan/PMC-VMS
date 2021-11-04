@@ -5,30 +5,36 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Application extends Model
 {
     use Notifiable;
+    use SoftDeletes;
+    //use Auditable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
-    protected $primaryKey = 'id'; //making sure that id is primary key
-
     protected $fillable = [
-        'fullname', 'email', 'dpassword','domain','isLocked','isApprover','dept','role','active', 'isdepartment','role_id','password'
-    ];
+        'scheduled_date', 
+        'scheduled_time',
+        'reason',
+        'posted_date',
+        'posted_time',
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
+    ];
+    protected $auditInclude = [
+        'scheduled_date', 
+        'scheduled_time',
+        'reason',
+        'posted_date',
+        'posted_time',
+
     ];
 
     /**
@@ -39,4 +45,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }

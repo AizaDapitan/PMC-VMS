@@ -1,4 +1,3 @@
-
 @extends('layout.forms')
 
 @section('content')
@@ -17,12 +16,13 @@
         <div class="clearfix"></div>
         <div class="row">
             <div class="col-md-4 ">
-                
+
                 @if(Session::has('success'))
 
                 <script>
-                    setTimeout(function(){ $('#success').fadeOut();
-                    }, 3000 );
+                    setTimeout(function() {
+                        $('#success').fadeOut();
+                    }, 3000);
                 </script>
 
                 <div id="success" class="alert alert-success alert-dismissable">
@@ -34,8 +34,9 @@
                 @if(Session::has('error'))
 
                 <script>
-                    setTimeout(function(){ $('#error').fadeOut();
-                    }, 3000 );
+                    setTimeout(function() {
+                        $('#error').fadeOut();
+                    }, 3000);
                 </script>
                 <div id="error" class="alert alert-danger alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -43,8 +44,16 @@
                 </div>
 
                 @endif
+                @if ($errors->any())
+                <script>
+                    $('#error_any').fadeOut();
+                </script>
+                <div id="error_any" class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong><span class="fa fa-warning"></span> Error!</strong> {{ $errors->first() }}
+                </div>
+                @endif
 
-                
                 <!-- BEGIN SAMPLE FORM PORTLET-->
                 <div class="portlet light bordered">
                     <div class="portlet-title">
@@ -60,17 +69,17 @@
                                 <div class="form-group">
                                     <input class="form-control" type="hidden" name="search" id="search" placeholder="Search Employee ( Last Name, First Name)" disabled readonly />
 
-                                    <input class="form-control" type="text" id="searchemp" placeholder="Search Employee"/>
-                                      <span><img style="display: none;" id="emp_spinner" class="wd-15p mg-t-1" src="{{ asset('assets/apps/img/spinner/spinner5.gif') }}" height="50" width="150" alt=""></span>
+                                    <input class="form-control" type="text" id="searchemp" placeholder="Search Employee" />
+                                    <span><img style="display: none;" id="emp_spinner" class="wd-15p mg-t-1" src="{{ asset('assets/apps/img/spinner/spinner5.gif') }}" height="50" width="150" alt=""></span>
                                 </div>
                                 <div id="result"></div>
-                                <div id="employee_list"></div> 
+                                <div id="employee_list"></div>
                             </div>
                             <form action="{{route('maintenance.user.update')}}" method="post">
                                 @csrf
-                                <div class="col-md-12" id="addemp" style="display: block;"> 
+                                <div class="col-md-12" id="addemp" style="display: block;">
 
-                                <input type="hidden" name="id" value="{{ request()->query('id') }}">                               
+                                    <input type="hidden" name="id" value="{{ request()->query('id') }}">
 
                                     @if(isset($name) || isset($dept))
 
@@ -79,12 +88,12 @@
                                             <label for="" class="control-label">Full Name</label>
 
                                             @if(isset($name))
-                                                
-                                                <input readonly type="text" name="firstName" id="fullname" class="form-control" value="{{$name}}">
+
+                                            <input readonly type="text" name="fullname" id="fullname" class="form-control" value="{{$name}}">
 
                                             @else
 
-                                                <input readonly type="text" placeholder="First Name" name="firstName" id="fullname" class="form-control" />
+                                            <input readonly type="text" placeholder="First Name" name="fullname" id="fullname" class="form-control" />
 
                                             @endif
 
@@ -94,31 +103,31 @@
 
                                             @if(isset($dept))
 
-                                                <input readonly type="text" class="form-control" name="dept" id="department" value="{{$dept}}">
+                                            <input readonly type="text" class="form-control" name="dept" id="department" value="{{$dept}}">
 
                                             @else
 
-                                                <input readonly type="text" placeholder="Department" name="dept" id="department" class="form-control" />
+                                            <input readonly type="text" placeholder="Department" name="dept" id="department" class="form-control" />
 
                                             @endif
 
                                         </div>
                                     </div>
                                     @else
-                                      <div class="row">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <label for="" class="control-label">Full Name</label>
-                                          
-                                                <input readonly type="text" placeholder="First Name" name="firstName" id="fullname" class="form-control" />
-                                            
+
+                                            <input readonly type="text" placeholder="Name" name="fullname" id="fullname" class="form-control" />
+
 
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">Department</label>
-                                          
 
-                                                <input readonly type="text" placeholder="Department" name="dept" id="department" class="form-control" />
-                                            
+
+                                            <input readonly type="text" placeholder="Department" name="dept" id="department" class="form-control" />
+
 
                                         </div>
                                     </div>
@@ -127,68 +136,43 @@
 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            
-                                            @if(isset($domain)) 
 
-                                                <label class="control-label">Domain</label>
-                                                <input required type="text" class="form-control" name="domain" value="{{$domain}}">
-                                            
-                                            
+                                            @if(isset($domain))
+
+                                            <label class="control-label">Domain</label>
+                                            <input required type="text" class="form-control" name="domain" value="{{$domain}}">
+
+
                                             @else
 
-                                                <label class="control-label">Domain</label>
-                                                <input required type="text" class="form-control" name="domain">
-                                            @endif                                   
+                                            <label class="control-label">Domain</label>
+                                            <input required type="text" class="form-control" name="domain">
+                                            @endif
                                         </div>
                                         <div class="col-md-6">
-
-                                        @if(isset($role))
-
                                             <label class="control-label">Role</label>
-                                            <select required class="form-control" name="u_role">
-
-                                                @if($role == 'requestor')
-
-                                                <option value="{{$role}}">{{$role}}</option>
-                                                <option value="approver">APPROVER</option>
-                                                <option value="admin">ADMIN</option> 
-
-
-                                                @elseif($role == 'approver')
-
-                                                <option value="{{$role}}">{{$role}}</option>
-                                                <option value="admin">ADMIN</option>
-                                                <option value="requestor">REQUESTOR</option>
-
-                                                
-
-                                                @elseif($role == 'admin')
-                                                
-                                                <option value="{{$role}}}">{{$role}}</option>
-                                                <option value="requestor">REQUESTOR</option>
-                                                <option value="approver">APPROVER</option> 
-                                                
-                                                @endif
-
+                                            <select required name="role_id" id="role_id" class="form-control">
+                                                @foreach($roles as $role)
+                                                <option value="{{ $role['id'] }}" {{ ($role['id'] == $roleid) ? 'selected' : '' }}>{{ $role['name'] }}</option>
+                                                @endforeach
                                             </select>
-
-                                        
-
-                                        @else
-                                            
-                                            <label class="control-label">Role</label>
-                                            <select required class="form-control" name="u_role">
-                                            <option value="">-- Select Role --</option>
-                                            <option value="requestor">REQUESTOR</option>
-                                            <option value="approver">APPROVER</option>
-                                            <option value="admin">ADMIN</option>
-                                           </select>
-                                                                            
-                                        @endif
 
                                         </div>
                                     </div>
-                                    <br/>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            @if(isset($email))
+                                            <label class="control-label">Email Address:</label>
+                                            <input type="email" name="email" id="email" class="form-control col-md-4 input inline" placeholder="Email Address" required value="{{$email}}">
+                                            @else
+                                            <label class="control-label">Email Address:</label>
+                                            <input type="email" name="email" id="email" class="form-control col-md-4 input inline" placeholder="Email Address" required>
+
+                                            @endif
+                                        </div>
+
+                                    </div>
+                                    <br />
 
                                     @if(Request::get('id'))
 
@@ -197,7 +181,7 @@
                                             <span class="glyphicon glyphicon-edit"></span> Update
                                         </button>
                                     </div>
-                                    
+
                                     @else
 
                                     <button class="btn blue pull-right" type="submit" name="a_user">
@@ -207,7 +191,7 @@
                                     @endif
 
                                 </div>
-                            </form>                          
+                            </form>
                         </div>
 
                         <div class="row">
@@ -222,7 +206,7 @@
             <div class="col-md-8 ">
                 <div class="row">
                     <div class="col-md-12">
-                        
+
 
 
                         <div class="portlet light bordered">
@@ -274,7 +258,7 @@
                                                     </a>
                                                     @endif
                                                 </center>
-                                                
+
                                                 <div class="modal fade" id="unlock{{$item->id}}" tabindex="-1" role="basic" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <form action="{{route('maintenance.user.update')}}" method="POST">
@@ -314,67 +298,67 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                                
-                                                <td>
+
+                                            <td>
 
                                                 <a class="btn btn-circle btn-sm blue" href="{{Request::url()}}?id={{$item->id}}">
                                                     <i class="fa fa-edit"></i> Edit
                                                 </a>
-                                                   
-                                                    @if($item->active == 1)
 
-                                                    <a class="btn btn-circle btn-sm green" data-toggle="modal" href="#inactive{{$item->id}}">
-                                                        <i class="fa fa-check"></i> Active
-                                                    </a>
-                                                    <div class="modal fade" id="inactive{{$item->id}}" tabindex="-1" role="basic" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <form action="{{route('maintenance.user.update')}}" method="POST">
-                                                                @csrf
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <input type="hidden" name="id" value="{{$item->id}}">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                        <h4 class="modal-title"><b>Confirmation</b></h4>
-                                                                    </div>
-                                                                    <div class="modal-body"> Are you sure you want to <b>Deactivate</b> this user? </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-circle dark btn-outline" data-dismiss="modal">Close</button>
-                                                                        <button type="submit" name="deactivate" class="btn btn-circle red">Deactivate</button>
-                                                                    </div>
+                                                @if($item->active == 1)
+
+                                                <a class="btn btn-circle btn-sm green" data-toggle="modal" href="#inactive{{$item->id}}">
+                                                    <i class="fa fa-check"></i> Active
+                                                </a>
+                                                <div class="modal fade" id="inactive{{$item->id}}" tabindex="-1" role="basic" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form action="{{route('maintenance.user.update')}}" method="POST">
+                                                            @csrf
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <input type="hidden" name="id" value="{{$item->id}}">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title"><b>Confirmation</b></h4>
                                                                 </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-
-                                                    
-                                                    @elseif(! $item->active == 1)
-                                                    
-                                                    <a class="btn btn-circle btn-sm red" data-toggle="modal" href="#active{{$item->id}}">
-                                                        <i class="fa fa-close"></i> Inactive
-                                                    </a>
-
-                                                    <div class="modal fade" id="active{{$item->id}}" tabindex="-1" role="basic" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <form action="{{route('maintenance.user.update')}}" method="POST">
-                                                                @csrf
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <input type="hidden" name="id" value="{{$item->id}}">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                        <h4 class="modal-title"><b>Confirmation</b></h4>
-                                                                    </div>
-                                                                    <div class="modal-body"> Are you sure you want to <b>Activate</b> this user? </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-circle dark btn-outline" data-dismiss="modal">Close</button>
-                                                                        <button type="submit" name="activate" class="btn btn-circle blue">Activate</button>
-                                                                    </div>
+                                                                <div class="modal-body"> Are you sure you want to <b>Deactivate</b> this user? </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-circle dark btn-outline" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" name="deactivate" class="btn btn-circle red">Deactivate</button>
                                                                 </div>
-                                                            </form>
-                                                        </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                    
-                                                    @endif
-                                                </td>
+                                                </div>
+
+
+                                                @elseif(! $item->active == 1)
+
+                                                <a class="btn btn-circle btn-sm red" data-toggle="modal" href="#active{{$item->id}}">
+                                                    <i class="fa fa-close"></i> Inactive
+                                                </a>
+
+                                                <div class="modal fade" id="active{{$item->id}}" tabindex="-1" role="basic" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form action="{{route('maintenance.user.update')}}" method="POST">
+                                                            @csrf
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <input type="hidden" name="id" value="{{$item->id}}">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h4 class="modal-title"><b>Confirmation</b></h4>
+                                                                </div>
+                                                                <div class="modal-body"> Are you sure you want to <b>Activate</b> this user? </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-circle dark btn-outline" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" name="activate" class="btn btn-circle blue">Activate</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                @endif
+                                            </td>
                                             </td>
                                         </tr>
                                         @empty
@@ -405,16 +389,16 @@
 
 @push('javascript')
 <script>
-    jQuery(document).ready(function() {    
-       Metronic.init(); // init metronic core components
-       Layout.init(); // init current layout
-       TableManaged.init();
+    jQuery(document).ready(function() {
+        Metronic.init(); // init metronic core components
+        Layout.init(); // init current layout
+        TableManaged.init();
     });
 </script>
 <script>
-    let TableManaged = function () {
+    let TableManaged = function() {
 
-       let initTable1 = function () {
+        let initTable1 = function() {
 
             let table = $('#sample_1');
 
@@ -425,7 +409,7 @@
                 }, {
                     "orderable": true
                 }, {
-                    "orderable": true                    
+                    "orderable": true
                 }, {
                     "orderable": true
                 }, {
@@ -436,18 +420,18 @@
                     [5, 15, 20, "All"] // change per page values here
                 ],
                 // set the initial value
-                "pageLength": 5,            
+                "pageLength": 5,
                 "pagingType": "bootstrap_full_number",
                 "language": {
                     "lengthMenu": "  _MENU_ records",
                     "paginate": {
-                        "previous":"Prev",
+                        "previous": "Prev",
                         "next": "Next",
                         "last": "Last",
                         "first": "First"
                     }
                 },
-                "columnDefs": [{  // set default column settings
+                "columnDefs": [{ // set default column settings
                     'orderable': false,
                     'targets': [0]
                 }, {
@@ -461,10 +445,10 @@
 
             let tableWrapper = jQuery('#sample_1_wrapper');
 
-            table.find('.group-checkable').change(function () {
+            table.find('.group-checkable').change(function() {
                 let set = jQuery(this).attr("data-set");
                 let checked = jQuery(this).is(":checked");
-                jQuery(set).each(function () {
+                jQuery(set).each(function() {
                     if (checked) {
                         $(this).attr("checked", true);
                         $(this).parents('tr').addClass("active");
@@ -476,7 +460,7 @@
                 jQuery.uniform.update(set);
             });
 
-            table.on('change', 'tbody tr .checkboxes', function () {
+            table.on('change', 'tbody tr .checkboxes', function() {
                 $(this).parents('tr').toggleClass("active");
             });
 
@@ -485,7 +469,7 @@
 
         return {
             //main function to initiate the module
-            init: function () {
+            init: function() {
                 if (!jQuery().dataTable) {
                     return;
                 }
@@ -494,81 +478,81 @@
         };
 
     }();
-
 </script>
 
 <script>
+    $(document).ready(function() {
 
-    $(document).ready(function(){
+        var typingTimer;
 
-    var typingTimer;
+        $('#searchemp').keydown(function() {
+            $('#emp_spinner').show();
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(doneTypingEmployee, 2000);
+        });
 
-    $('#searchemp').keydown(function(){
-        $('#emp_spinner').show();
-        clearTimeout(typingTimer);
-        typingTimer = setTimeout(doneTypingEmployee, 2000);
+        //   $('#e_search').keydown(function(){
+        //     $('#e_emp_spinner').show();
+        //     clearTimeout(typingTimer);
+        //     typingTimer = setTimeout(e_doneTypingEmployee, 2000);
+        // });
+
+        function doneTypingEmployee() {
+            var query = $('#searchemp').val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('search.hris.employee') }}",
+                method: "POST",
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#emp_spinner').hide();
+                    $('#employee_list').fadeIn();
+                    $('#employee_list').html(data);
+                }
+            })
+        }
+
+        //    function e_doneTypingEmployee(){
+        //     var query = $('#e_search').val();
+        //     var _token = $('input[name="_token"]').val();
+        //     $.ajax({
+        //         url: "{{ route('e_search.e_hris.e_employee') }}",
+        //         method: "POST",
+        //         data: { query :query, _token:_token },
+        //         success: function(data)
+        //         {
+        //             $('#e_emp_spinner').hide();
+        //             $('#e_employee_list').fadeIn();
+        //             $('#e_employee_list').html(data);
+        //         }
+        //     })
+        // }
+
     });
 
-    //   $('#e_search').keydown(function(){
-    //     $('#e_emp_spinner').show();
-    //     clearTimeout(typingTimer);
-    //     typingTimer = setTimeout(e_doneTypingEmployee, 2000);
+    $(document).on('click', '.emp_list', function() {
+        var emp = $(this).text();
+        var i = emp.split("=");
+
+        $('#searchemp').val(i[0]);
+        $('#employee_id').val(i[1]);
+        $('#first_name').val(i[2]);
+        $('#middle_name').val(i[3]);
+        $('#last_name').val(i[4]);
+        $('#companyid').val(i[5]);
+        $('#department').val(i[6]);
+        $('#position').val(i[7]);
+        $('#fullname').val(i[8]);
+        $('#employee_list').fadeOut();
+        $('#addemp').fadeIn();
+    });
+
+    // $(document).on('click','#editemp',function(){
+    // $('#editemp').fadeIn();
     // });
-
-    function doneTypingEmployee(){
-        var query = $('#searchemp').val();
-        var _token = $('input[name="_token"]').val();
-        $.ajax({
-            url: "{{ route('search.hris.employee') }}",
-            method: "POST",
-            data: { query :query, _token:_token },
-            success: function(data)
-            {
-                $('#emp_spinner').hide();
-                $('#employee_list').fadeIn();
-                $('#employee_list').html(data);
-            }
-        })
-    }
-
-    //    function e_doneTypingEmployee(){
-    //     var query = $('#e_search').val();
-    //     var _token = $('input[name="_token"]').val();
-    //     $.ajax({
-    //         url: "{{ route('e_search.e_hris.e_employee') }}",
-    //         method: "POST",
-    //         data: { query :query, _token:_token },
-    //         success: function(data)
-    //         {
-    //             $('#e_emp_spinner').hide();
-    //             $('#e_employee_list').fadeIn();
-    //             $('#e_employee_list').html(data);
-    //         }
-    //     })
-    // }
-
-    });
-
-    $(document).on('click','.emp_list',function(){
-    var emp = $(this).text();
-    var i = emp.split("=");    
-
-    $('#searchemp').val(i[0]);
-    $('#employee_id').val(i[1]);
-    $('#first_name').val(i[2]);
-    $('#middle_name').val(i[3]);
-    $('#last_name').val(i[4]);
-    $('#companyid').val(i[5]);
-    $('#department').val(i[6]);
-    $('#position').val(i[7]);
-    $('#fullname').val(i[8]);
-    $('#employee_list').fadeOut();
-    $('#addemp').fadeIn();
-    });  
-
-     // $(document).on('click','#editemp',function(){
-     // $('#editemp').fadeIn();
-     // });
 
     // $(document).on('click','.e_emp_list',function(){
     // var emp = $(this).text();
@@ -586,7 +570,6 @@
     // $('#e_employee_list').fadeOut();
 
     // });   
-
-    </script>
+</script>
 
 @endpush

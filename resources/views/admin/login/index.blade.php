@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-	<form class="login-form" action="{{route('admin.login')}}" method="POST">
+	<form class="login-form" action="{{route('login.submit')}}" method="POST">
 		@csrf
 		<h3 class="form-title">Login to your account</h3>
 		<div class="alert alert-danger display-hide">
@@ -10,7 +10,22 @@
 			Enter any username and password. 
 			</span>
 		</div>
-		
+		@if($message = Session::get('error'))
+            <div class="alert alert-danger" role="alert">
+                <i data-feather="alert-circle" class="mg-r-10"></i> {{ $message }}
+            </div>
+            @endif
+
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <button class="close" data-close="alert"></button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
 		<div class="form-group">
 			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
 			<label class="control-label visible-ie8 visible-ie9">Username</label>

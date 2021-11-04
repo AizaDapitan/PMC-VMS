@@ -66,7 +66,7 @@
                                         <div class="col-md-12">
                                             <label class="control-label">Name <span class="required" aria-required="true"> * </span></label>                                                                                        
                                             @if(isset($roles))
-                                                <input type="text" class="form-control" name="name" id="name" required maxlength="30" value="{{$roles->name}}">
+                                                <input type="text" class="form-control" name="name" id="name" required maxlength="30" value="{{$roles->name}}"/>
                                             @else
                                                 <input type="text" placeholder="Role" name="name" id="name" class="form-control" required maxlength="30" />
                                             @endif
@@ -78,7 +78,7 @@
                                         <div class="col-md-12">
                                             <label class="control-label">Description <span class="required" aria-required="true"> * </span></label>                                                                                    
                                             @if(isset($roles))
-                                                <input type="text" class="form-control" name="description" id="description" required maxlength="50" value="{{$roles->description}}">
+                                                <input type="text" class="form-control" name="description" id="description" required maxlength="50" value="{{$roles->description}}"/>
                                             @else
                                                 <input type="text" placeholder="Description" name="description" id="description" class="form-control" required maxlength="50" />
                                             @endif

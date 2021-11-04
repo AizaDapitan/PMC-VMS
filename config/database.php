@@ -103,6 +103,28 @@ return [
             'prefix_indexes' => true,
         ], 
 
+        // 'sqlsrv_dvo_hris' => [
+        //     'driver' => 'sqlsrv_dvo_hris',                    
+        //     'host' => env('DB_HOST_HRIS_DVO','HOF4B7E2A32209L\INHOUSE'),
+        //     'port' => env('DB_PORT_HRIS_DVO','53285'),
+        //     'database' => env('DB_DATABASE_HRIS_DVO','mssqlws1ph2_dimshris'),
+        //     'username' => env('DB_USERNAME_HRIS_DVO','sa'),
+        //     'password' => env('DB_PASSWORD_HRIS_DVO','@Temp123!'),
+        //     'charset' => 'utf8',
+        //     'prefix' => '',                  
+        // ],
+
+        // 'sqlsrv_agn_hris' => [
+        //     'driver' => 'sqlsrv_agn_hris',                    
+        //     'host' => env('DB_HOST_HRIS_AGN','HOF4B7E2A32209L\INHOUSE'),
+        //     'port' => env('DB_PORT_HRIS_AGN','53285'),
+        //     'database' => env('DB_DATABASE_HRIS_AGN','mssqlws1ph2_dimshris'),
+        //     'username' => env('DB_USERNAME_HRIS_AGN','sa'),
+        //     'password' => env('DB_PASSWORD_HRIS_AGN','@Temp123!'),
+        //     'charset' => 'utf8',
+        //     'prefix' => '',            
+        // ],
+
         'sqlsrv_dvo_hris' => [
             'driver' => 'sqlsrv',                    
             'host' => env('DB_HOST_HRIS_DVO','HOF4B7E2A32209L\INHOUSE'),
@@ -115,42 +137,31 @@ return [
         ],
 
         'sqlsrv_agn_hris' => [
-            'driver' => 'sqlsrv',                    
-            'host' => env('DB_HOST_HRIS_AGN','HOF4B7E2A32209L\INHOUSE'),
-            'port' => env('DB_PORT_HRIS_AGN','53285'),
-            'database' => env('DB_DATABASE_HRIS_AGN','mssqlws1ph2_dimshris'),
-            'username' => env('DB_USERNAME_HRIS_AGN','sa'),
-            'password' => env('DB_PASSWORD_HRIS_AGN','@Temp123!'),
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST_HRIS_AGN', '127.0.0.1'),
+            'port' => env('DB_PORT_HRIS_AGN', '64472'),
+            'database' => env('DB_DATABASE_HRIS_AGN', 'forge'),
+            'username' => env('DB_USERNAME_HRIS_AGN', 'forge'),
+            'password' => env('DB_PASSWORD_HRIS_AGN', ''),
             'charset' => 'utf8',
-            'prefix' => '',            
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null
+
         ],
 
-        // 'sqlsrv_agn_hris' => [
-        //     'driver' => 'sqlsrv',
-        //     'host' => env('DB_HOST_HRIS_AGN', '127.0.0.1'),
-        //     'port' => env('DB_PORT_HRIS_AGN', '64472'),
-        //     'database' => env('DB_DATABASE_HRIS_AGN', 'forge'),
-        //     'username' => env('DB_USERNAME_HRIS_AGN', 'forge'),
-        //     'password' => env('DB_PASSWORD_HRIS_AGN', ''),
-        //     'charset' => 'utf8',
-        //     'collation' => 'utf8_unicode_ci',
-        //     'prefix' => '',
-        //     'strict' => false,
-        //     'engine' => null
+        'sqlsrv_contractors' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST_CONTRACTORS', '127.0.0.1'),
+            'port' => env('DB_PORT_CONTRACTORS', '1433'),
+            'database' => env('DB_DATABASE_CONTRACTORS', 'forge'),
+            'username' => env('DB_USERNAME_CONTRACTORS', 'forge'),
+            'password' => env('DB_PASSWORD_CONTRACTORS', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
 
-        // ],
-
-        // 'sqlsrv_contractors' => [
-        //     'driver' => 'sqlsrv',
-        //     'host' => env('DB_HOST_CONTRACTORS', '127.0.0.1'),
-        //     'port' => env('DB_PORT_CONTRACTORS', '1433'),
-        //     'database' => env('DB_DATABASE_CONTRACTORS', 'forge'),
-        //     'username' => env('DB_USERNAME_CONTRACTORS', 'forge'),
-        //     'password' => env('DB_PASSWORD_CONTRACTORS', ''),
-        //     'charset' => 'utf8',
-        //     'prefix' => '',
-
-        // ],
+        ],
          'sqlsrv_fms' => [
             'driver'    => env('DB_CONNECTION_FMS'),
             'host'      => env('DB_HOST_FMS'),

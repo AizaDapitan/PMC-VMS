@@ -24,7 +24,7 @@ class UserService
             $data->push([
                 'id' => $user->id,
                 'fullname' => $user->fullname,
-                'username' => $user->username,
+                'domain' => $user->domain,
                 'role' => $user->role,
                 'active' => $user->active,
                 'role_id' => $user->role_id,

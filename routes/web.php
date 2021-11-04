@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 // Generate Dummy account
 Route::get('/genAccDummy', 'AuthController@genAccDummy');
 
+
+Route::get('logout', 'Auth\LoginController@logout');
+Route::get('/','Auth\LoginController@index')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('login.submit'); // login submit
+
+
+Route::get('adminlogin/admin', 'Auth\LoginController@adminLogin')->name('login.adminLogin'); // login
+Route::post('adminsubmit/admin', 'Auth\LoginController@adminSubmit')->name('login.adminsubmit'); // login submit
 Route::middleware('auth')->group(function() {
 
     Route::post('/search-hris-employee', 'SearchController@search_hris_employee')->name('search.hris.employee');
@@ -87,6 +95,24 @@ Route::middleware('auth')->group(function() {
                     Route::get('/', 'UserRightController@index')->name('useraccessrights.index');
                     Route::post('store', 'UserRightController@store')->name('useraccessrights.store');
                     Route::get('store', 'UserRightController@store')->name('useraccessrights.store');
+                });
+
+                // Application routes
+                Route::group(['prefix' => 'application/maintenance'], function () {
+                    Route::get('/', 'ApplicationController@index')->name('application.index');
+                    Route::post('/application-maintenance','ApplicationController@updateApplication')->name('application.update');
+                    Route::delete('{id}/destroy', 'ApplicationController@destroy')->name('application.destroy');
+
+                    //Route::post('store', 'ApplicationController@store')->name('application.store');
+                    //Route::post('edit', 'ApplicationController@edit')->name('application.edit');                                    
+                    //Route::put('update', 'ApplicationController@update')->name('application.update');
+                    
+                    //Route::any('/search', 'ApplicationController@search')->name('application.search');
+                    //Route::get('{id}/destroy', 'ApplicationController@destroy')->name('application.destroy');
+                    Route::get('systemDown', 'ApplicationController@systemDown')->name('application.systemDown');
+                    Route::get('systemUp', 'ApplicationController@systemUp')->name('application.systemUp');
+                    Route::get('create_indexing', 'ApplicationController@create_indexing')->name('application.create_indexing');
+                    
                 });
 
             });

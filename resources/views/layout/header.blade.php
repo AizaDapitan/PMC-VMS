@@ -170,6 +170,7 @@
 									<li><a href="{{route('maintenance.permission')}}"><i class="fa fa-file"></i> Permission Maintenance</a></li>
 									<li><a href="{{route('maintenance.roleaccessrights.index')}}"><i class="fa fa-file"></i> Role Access Rights Maintenance</a></li>
 									<li><a href="{{route('maintenance.useraccessrights.index')}}"><i class="fa fa-file"></i> User Access Rights Maintenance</a></li>
+									<li><a href="{{route('maintenance.application.index')}}"><i class="fa fa-file"></i> Application Maintenance</a></li>
 								</ul>
 
 							</div>
