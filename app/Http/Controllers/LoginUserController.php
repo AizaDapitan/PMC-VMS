@@ -16,15 +16,21 @@ class LoginUserController extends Controller
         $hasher = app('hash');
 
         $validate = $request->validate([
-        	'current_password'		=> 'required',
-        	'new_password'			=> 'required',
-        	'new_confirm_password'	=> 'same:new_password'
-        ]); 
+            'current_password'      => 'required',
+            'new_password'          => [
+                'required', 'string', 'min:8', 'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&._]/'
+            ],
+            'new_confirm_password'  => 'same:new_password'
+        ]);
 
         if ($hasher->check($request->current_password, $user->dpassword)) {
 
         	$user->update([
-        		'dpassword'	=> Hash::make($request->new_password)
+        		'dpassword'	=> Hash::make($request->new_password),
+				'password' => Hash::make($request->new_password),
         	]);
 
         	\Auth::logout();

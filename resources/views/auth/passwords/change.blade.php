@@ -9,7 +9,7 @@
                 
                 <div style="width: 550px; display: block; margin: 100px auto 0; background: #696969; padding: 30px;">
                    
-                        <form method="POST" action="/change-password" role="form">
+                        <form method="POST" action="{{ route('updatePassword') }}" role="form">
                             @csrf 
                             @method('PATCH')
        
@@ -38,6 +38,12 @@
       
                                 <div class="col-md-8">
                                     <input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12 col-form-label text-md-center" >
+                                    <label class="control-label"></label><i class="font-yellow" style="font-size: 14px;font-weight:bold;">(Min. 8, alphanumeric, at least 1 upper case, 1 number and 1 special character) </i>
                                 </div>
                             </div>
       

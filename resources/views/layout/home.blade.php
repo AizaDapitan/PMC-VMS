@@ -81,7 +81,8 @@ return i;
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-					<a href="/change-password">
+					<!-- <a href="/change-password"> -->
+					<a href="{{ route('change-pass') }}">
 						<i style="color:orange;" class="icon-settings"></i>
 						<strong style="color:orange"> CHANGE PASSWORD</strong>
 						<img style="height:20px;" src="">
