@@ -49,7 +49,7 @@
                                                     <div class="col-md-12 margin-bottom-10">
                                                         <label class="control-label col-md-3">Name</label>
                                                         <div class="col-md-9">
-                                                        <input type="text" size="16" name="name" class="form-control" value="{{$item->name}}">
+                                                        <input type="text" size="16" name="name" class="form-control" value="{{$item->name}}" required maxlength="50">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -100,7 +100,7 @@
                                         <div class="col-md-12 margin-bottom-10">
                                             <label class="control-label col-md-3">Name</label>
                                             <div class="col-md-9">
-                                                <input type="text" size="16" name="name" id="name" class="form-control" required="required">
+                                                <input type="text" size="16" name="name" id="name" class="form-control" required maxlength="50">
                                             </div>
                                         </div>
                                     </div>										

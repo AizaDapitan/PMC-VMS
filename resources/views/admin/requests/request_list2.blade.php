@@ -576,9 +576,12 @@
             <div class="pull-right">
                 <p>
                     @if($page > 1)
-                        <a class="btn blue" href="/vehicle/request/list?page={{ isset($page) ? $page-1: '2' }}"><< Previous </a>
+						<a class="btn blue" href="{{env('APP_URL')}}/vehicle/request/list?page={{ isset($page) ? $page-1: '2' }}" ><< Previous </a>
+                        <!-- <a class="btn blue" href="/vehicle/request/list?page={{ isset($page) ? $page-1: '2' }}"><< Previous </a> -->
                     @endif
-                    <a class="btn blue" href="/vehicle/request/list?page={{ isset($page) ? $page+1: '2'  }}">Next >> </a>
+
+					<a class="btn blue" href="{{env('APP_URL')}}/vehicle/request/list?page={{ isset($page) ? $page+1: '2'  }}">Next >> </a>
+                    <!-- <a class="btn blue" href="/vehicle/request/list?page={{ isset($page) ? $page+1: '2'  }}">Next >> </a> -->
                 </p>
             </div>
                 
