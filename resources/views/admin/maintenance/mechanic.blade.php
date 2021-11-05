@@ -80,8 +80,8 @@
                                                         <form action="{{route('maintenance.mechanic.destroy', ['mechanic' => $item->id])}}" method="POST">
                                                             @method('delete')
                                                             @csrf
-                                                            <a href="{{ route('maintenance.mechanic.edit', ['mechanic' => $item->id]) }}" class="btn green btn-xs"><i class="fa fa-edit"></i></a>
-                                                            <button type="submit" class="btn red btn-xs"><i class="fa fa-minus-circle"></i></button>
+                                                            <a href="{{ route('maintenance.mechanic.edit', ['mechanic' => $item->id]) }}" class="btn green btn-xs tooltips"><i class="fa fa-edit"></i></a>
+                                                            <button type="submit" class="btn red btn-xs tooltips"><i class="fa fa-minus-circle"></i></button>
                                                         </form>
                                                         
                                                     </td>
