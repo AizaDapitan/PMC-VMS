@@ -96,6 +96,7 @@ class SysMaintenanceUnitController extends Controller
             'engineno'=> $request->get('engine_serial'),
             'color'=> $request->get('color'),
             'vehicle_code'=> $request->get('vehicle_code_new'),
+            'is_dispose'=> 0,
         ]);
 
         Session::flash('success'," Unit Created Successfully...");
