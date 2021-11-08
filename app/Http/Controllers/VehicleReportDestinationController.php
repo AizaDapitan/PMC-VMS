@@ -58,9 +58,11 @@ class VehicleReportDestinationController extends Controller
                 ));
             }
             
+		$saveLogs = $this->reportService->create("Top Frequent Destinations", $request);
             return view('admin.requests.reports.destinations-report', compact('start','end','destinationTbl','jsondata'));
         }
 
+		$saveLogs = $this->reportService->create("Dispatch Distribution per Department", $request);
         return view('admin.requests.reports.destinations-report');
     }
 }

@@ -171,6 +171,14 @@
 									<li><a href="{{route('maintenance.roleaccessrights.index')}}"><i class="fa fa-file"></i> Role Access Rights Maintenance</a></li>
 									<li><a href="{{route('maintenance.useraccessrights.index')}}"><i class="fa fa-file"></i> User Access Rights Maintenance</a></li>
 									<li><a href="{{route('maintenance.application.index')}}"><i class="fa fa-file"></i> Application Maintenance</a></li>
+									<li class="dropdown-submenu">
+										<a href="javascript:;">
+											<i class="fa fa-file"></i> Reports </a>
+										<ul class="dropdown-menu">
+											<li><a href="{{route('audit-logs')}}"><i class="fa fa-user"></i> User Action </a></li>
+											<li><a href="{{route('error-logs')}}"><i class="fa fa-user"></i> Error Logs </a></li>
+										</ul>
+									</li>
 								</ul>
 
 							</div>

@@ -258,6 +258,7 @@ class VehicleRequestController extends Controller
             $requests = RequestRawData::get();
         }
 		
+		$saveLogs = $this->reportService->create("Vehicle Request Raw Data", $request);
         return view('admin.requests.reports.requests_raw_data', compact('requests', 'start', 'end'));
     }
 

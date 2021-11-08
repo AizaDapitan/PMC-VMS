@@ -17,6 +17,7 @@ use App\Department;
 use App\Unit;
 use App\Drivers;
 use App\FMSIssuanceRequest;
+use App\Services\ReportService;
 
 use App\Helper\Validators;
 
@@ -26,6 +27,15 @@ use DB;
 
 class DispatchController extends Controller
 {
+    public function __construct(
+		// RoleRightService $roleRightService,
+		ReportService $reportService
+		// UserService $userService
+	) {
+		$this->reportService = $reportService;
+		// $this->roleRightService = $roleRightService;
+		// $this->userService = $userService;
+	}
     public function tripTicket(Request $request){
         $cancel_id = $request->get('cancel_tid');
         $query = Dispatch::where('tripTicket', $request->get('id'))
@@ -135,6 +145,7 @@ class DispatchController extends Controller
             array_push($reports, $reportObject);
         }
 
+		$saveLogs = $this->reportService->create("Top Vehicles by Distance Travelled", $request);
         return view('admin.requests.reports.vehicle_total_distance', [
             'items' => $reports,
             'start' => $start,
@@ -242,6 +253,7 @@ class DispatchController extends Controller
             array_push($jsonDispatches, $object);
         }
 
+		$saveLogs = $this->reportService->create("Dispatch Distribution per Department", $request);
         return view('admin.requests.reports.dispatch_per_dept', [
             'items' => $jsonDispatches,
             'start' => $start,
@@ -249,7 +261,7 @@ class DispatchController extends Controller
         ]);
     }
 
-    public function dispatchesPerDepartment(){
+    public function dispatchesPerDepartment(Request $request){
         $jsonDispatches = [];
 
         $departments = Department::dispatches()
@@ -266,6 +278,7 @@ class DispatchController extends Controller
             array_push($jsonDispatches, $object);
         }
 
+		$saveLogs = $this->reportService->create("Top Vehicles by number of Dispatches", $request);
         return response()->json($jsonDispatches);
     }
 
@@ -285,6 +298,7 @@ class DispatchController extends Controller
             array_push($report, $object);
         }
 
+		$saveLogs = $this->reportService->create("Top Vehicles by number of Dispatches", $request);
         return response()->json($report);
     }
 
@@ -430,6 +444,8 @@ class DispatchController extends Controller
                 }
 
                 $weeknum = $request->weeknum;
+                
+		$saveLogs = $this->reportService->create("Weekly", $request);
                 return view('admin.requests.reports.weekly-report',compact('weeks','unit','rs','weeknum','request','fresult','isMotor'));
             } else {
                  $result = "
@@ -457,13 +473,14 @@ class DispatchController extends Controller
                 $fresult = FMSIssuanceRequest::where('created_at','>=',$request->from.' 00:00:01')->where('created_at','<=',$request->to.' 23:59:59')->get();                 
 
                 $weeknum = $request->weeknum;
+                $saveLogs = $this->reportService->create("Weekly", $request);
                 return view('admin.requests.reports.weekly-report',compact('weeks','unit','rs','weeknum','request','fresult'));
             }
         } else {
             return view('admin.requests.reports.weekly-report',compact('weeks','unit','request','isMotor'));
         }
     }
-        public function daily($dyt = null){
+        public function daily($dyt = null, Request $request){
         if(!$dyt)
         $dyt = date('Y-m-d');
         $result = "
@@ -483,6 +500,7 @@ class DispatchController extends Controller
         d.dateStart>='".$dyt." 00:00:00' and d.dateStart<='".$dyt." 23:59:59'";
         // dd($result);
         $rs = DB::select($result);
+        $saveLogs = $this->reportService->create("Daily", $request);
         return view('admin.requests.reports.daily-report',compact('dyt','rs'));
         }
 }

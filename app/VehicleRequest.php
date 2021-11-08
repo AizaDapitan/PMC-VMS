@@ -4,14 +4,32 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable;
 
-class VehicleRequest extends Model
+class VehicleRequest extends Model implements AuditableContract
 {
+
+    use Auditable;
     use SoftDeletes;
 
     public $table = 'vehicle_request';
 
     public $fillable = [
+        'dept',
+        'date_needed',
+        'addedAt',
+        'purpose',
+        'email',
+        'costCode',
+        'addedAt',
+        'Cancelled_at',
+        'status',
+        'lastStatusChanged',
+        'dept_id',
+        'message_id'
+    ];
+    public $auditInclude = [
         'dept',
         'date_needed',
         'addedAt',

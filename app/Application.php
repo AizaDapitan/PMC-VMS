@@ -8,12 +8,16 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable;
 
-class Application extends Model
+class Application extends Model implements AuditableContract
 {
+
+    use Auditable;
+
     use Notifiable;
     use SoftDeletes;
-    //use Auditable;
 
     /**
      * The attributes that are mass assignable.

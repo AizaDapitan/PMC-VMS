@@ -39,11 +39,11 @@ class LoginController extends Controller
     // {
     //     $this->middleware('guest')->except('logout');
     // }
-    // public function __construct(
-    //     AuditService $auditService)
-    // {
-    //     $this->auditService = $auditService;
-    // }
+    public function __construct(
+        AuditService $auditService)
+    {
+        $this->auditService = $auditService;
+    }
     public function index()
     {
         return auth()->check() ? redirect()->route('form.home') : view('auth.login');
@@ -57,7 +57,7 @@ class LoginController extends Controller
             'isLocked' => 0,
         ]);
         if ($checker) {
-            // $saveLogs = $this->auditService->create($request,"Login User : ". auth()->user()->username,"Login");            
+            $saveLogs = $this->auditService->create($request,"Login User : ". auth()->user()->username,"Login");            
             return redirect()->route('form.home');
         } else {
             return redirect()->back()->withErrors('Invalid login credentials.');
@@ -66,7 +66,7 @@ class LoginController extends Controller
     
     public function logout(Request $request)
     {
-        // $saveLogs = $this->auditService->create($request,"Logout User : ". auth()->user()->username,"Logout");
+        $saveLogs = $this->auditService->create($request,"Logout User : ". auth()->user()->username,"Logout");
         return auth()->logout() ?? redirect()->route('login');
     }
     public function adminLogin()
@@ -83,7 +83,7 @@ class LoginController extends Controller
         if ($checker) {
             // dd(auth()->user()->role);
             if(auth()->user()->role == "ADMIN" || auth()->user()->role == "admin" ){
-                // $saveLogs = $this->auditService->create($request,"Login User : ". auth()->user()->username,"Admin Login");      
+                $saveLogs = $this->auditService->create($request,"Login User : ". auth()->user()->username,"Admin Login");      
                 return redirect()->route('maintenance.application.index');
             }
             else

@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\DispatchStatusEnum;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable;
 
-class Dispatch extends Model
+class Dispatch extends Model implements AuditableContract
 {
+
+    use Auditable;
     public $table = 'dispatch';
 
     public $fillable = [
@@ -45,7 +49,42 @@ class Dispatch extends Model
 		'addedBy',
 		'addedDate'
     ];
-
+    public $auditInclude = [
+        'unitId',
+        'deptId',
+        'dateStart',
+        'dateEnd',
+        'mins',
+        'purpose',
+        'type',
+        'dispatchId',
+        'tripTicket',
+        'destination',
+        'passengers',
+        'odometer_start',
+        'odometer_end',
+        'fuel_consumption',
+        'fuel_added_qty',
+        'fuel_added_type',
+        'request_id',
+        'driver_id',
+        'Cancelled_by',
+        'Cancelled_at',
+        'Closed_by',
+        'Status',
+        'isPrinted',
+        'RQ',
+        'fuel_requested_qty',
+        'itemCode',
+        'uom',
+        'numberOfTrips',
+        'vehicle_cost_code',
+        'do',
+        'app_date',
+        'unitId',
+		'addedBy',
+		'addedDate'
+    ];
     public function driver(){
         return $this->belongsTo('App\Drivers', 'driver_id');
     }

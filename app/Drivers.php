@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable;
 
-class Drivers extends Model
+class Drivers extends Model implements AuditableContract
 {
+
+    use Auditable;
     public $table = 'drivers';
 
     public $fillable = [
@@ -13,4 +17,11 @@ class Drivers extends Model
         'type',
         'isActive'
     ];
+    
+    public $auditInclude = [
+        'driver_name',
+        'type',
+        'isActive'
+    ];
+}
 }

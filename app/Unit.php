@@ -3,12 +3,33 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable  as AuditableContract;
+use OwenIt\Auditing\Auditable;
 
-class Unit extends Model
+class Unit extends Model implements AuditableContract
 {
+
+    use Auditable;
+
     public $table = 'unit';
     
     protected $fillable = [
+        'name',
+        'type',
+        'required_availability_hours',
+        'active',
+        'dept','model',
+        'plateno',
+        'chassisno',
+        'engineno',
+        'color',
+        'datasource',
+        'vehicle_code',
+        'isECS',
+        'odo_status',
+        'is_dispose'
+    ];
+    protected $auditInclude = [
         'name',
         'type',
         'required_availability_hours',

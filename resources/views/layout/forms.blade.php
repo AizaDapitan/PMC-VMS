@@ -23,6 +23,10 @@
   <link href="{{ asset('metronic/assets/admin/layout/css/layout.css') }}" rel="stylesheet" type="text/css" />
   <link id="style_color" href="{{ asset('metronic/assets/admin/layout/css/themes/default.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('metronic/assets/admin/layout/css/custom.css') }}" rel="stylesheet" type="text/css" />
+  
+
+<link href="{{ url('plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ url('plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <!-- END THEME STYLES -->
   <link rel="shortcut icon" href="favicon.ico" />
   <style>
@@ -190,6 +194,10 @@
   <script src="{{ asset('metronic/assets/admin/pages/scripts/table-managed.js') }}"></script>
   <script src="{{ asset('js/notifications.js') }}"></script>
   <script src="{{ asset('js/comments.js') }}"></script>
+<script src="{{ url('plugins/datatables/datatable.js') }}" type="text/javascript"></script>
+<script src="{{ url('plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
+
+<script src="{{ url('plugins/datatables/table-datatables-buttons.js') }}" type="text/javascript"></script>
 
   @stack('javascript')
   <script>

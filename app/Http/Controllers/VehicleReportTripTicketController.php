@@ -66,9 +66,11 @@ class VehicleReportTripTicketController extends Controller
 
             $driverResult = DB::select($result);
 
+            $saveLogs = $this->reportService->create("Trip Tickets", $request);
             return view('admin.requests.reports.tripticket-report', compact('drivers','unit','driverResult'));
         }
 
+		$saveLogs = $this->reportService->create("Trip Tickets", $request);
         return view('admin.requests.reports.tripticket-report', compact('drivers','unit'));
     }
 }

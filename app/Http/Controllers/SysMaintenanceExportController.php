@@ -43,11 +43,10 @@ class SysMaintenanceExportController extends Controller
                 return view('admin.maintenance.export', compact('breakdown'));
                 break;
             case 'raw_data':
-                
-                if( $request->has('startDate'))
-                {
+
+                if ($request->has('startDate')) {
                     // $startDate = $request->query('startDate');
-                    
+
                 }
 
                 $startDate = "2018-01-01";
@@ -68,7 +67,7 @@ class SysMaintenanceExportController extends Controller
                     (
                         (d.dateStart >= '" . $startDate . "' and d.dateEnd <= '" . $endDate . " 23:59:59') 
                     OR 
-                        (d.dateEnd >= '" . $startDate . "' and d.dateEnd <= '" . $endDate. " 23:59:59')
+                        (d.dateEnd >= '" . $startDate . "' and d.dateEnd <= '" . $endDate . " 23:59:59')
                     ) 
                 AND 
                     d.active=1 
@@ -77,6 +76,8 @@ class SysMaintenanceExportController extends Controller
 
 
                 $raw_data = DB::select($query);
+
+                $saveLogs = $this->reportService->create("Downtime Report", $request);
                 return view('admin.maintenance.export', compact('raw_data'));
                 break;
             default:
