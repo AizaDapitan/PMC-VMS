@@ -56,7 +56,7 @@
 							<label class="control-label col-md-3">Work Order</label>
 							<div class="col-md-9">
 								<input type="text" size="16" name="work_order" id="work_order" class="form-control"
-									required="required">
+								required maxlength="50">
 							</div>
 						</div>
 					</div>

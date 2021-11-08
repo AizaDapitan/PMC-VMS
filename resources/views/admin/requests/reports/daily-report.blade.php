@@ -114,7 +114,7 @@
 
 <script>
     function generate_report(d){
-       window.location.href = "/vehicle/report/daily/"+d; 
+       window.location.href = "{{env('APP_URL')}}/vehicle/report/daily/"+d; 
     }
 </script>
 @endsection

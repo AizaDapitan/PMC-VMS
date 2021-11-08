@@ -46,7 +46,7 @@
                         <div class="modal-body">
                               <div class="form-group">
                                  <label for="">Name:</label>
-                                 <input type="text" class="form-control" id="dname" name="dname" placeholder="Last, First MI">
+                                 <input type="text" class="form-control" id="dname" name="dname" placeholder="Last, First MI" required maxlength="50">
                               </div>  
                               <br><br>
                               <div class="form-group">
@@ -62,7 +62,7 @@
                               </div>  
                               <div class="form-group">
                                  <label for=""> OR Add New: </label>
-                                 <input type="text" class="form-control" id="dtype2" name="dtype2" placeholder="New Type">
+                                 <input type="text" class="form-control" id="dtype2" name="dtype2" placeholder="New Type" required maxlength="30">
                               </div> 
                               
                            
@@ -87,7 +87,7 @@
                         <div class="modal-body">
                               <div class="form-group">
                                  <label for="">Name:</label>
-                                 <input type="text" class="form-control" id="edname" required name="edname" placeholder="Last, First MI">
+                                 <input type="text" class="form-control" id="edname" required name="edname" placeholder="Last, First MI" required maxlength="50">
                                  <input type="hidden" value="" required name="edid" id="edid">
                               </div>  
                               <br><br>
@@ -103,7 +103,7 @@
                               </div>  
                               <div class="form-group">
                                  <label for=""> OR Add New: </label>
-                                 <input type="text" class="form-control" id="edtype2" name="edtype2" placeholder="New Type">
+                                 <input type="text" class="form-control" id="edtype2" name="edtype2" placeholder="New Type" required maxlength="30">
                               </div> 
                               
                            

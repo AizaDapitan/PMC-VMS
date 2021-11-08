@@ -321,7 +321,8 @@ class DispatchController extends Controller
 
         return response()->json($reports);
     }
-    public function weekly(Request $request, $week = null){  
+    public function weekly(Request $request, $week = null)
+    {  
         // dd($request);
         $unit = Unit::all();
         $startDate = '2021-01-01';
@@ -333,8 +334,8 @@ class DispatchController extends Controller
              $weeks.='<option value="'.$n.'|'.date('Y-m-d', $i).'|'.date('Y-m-d', strtotime('+6 days',$i)).'">Week '.$n.' ('.date('Y-m-d', $i).' to '.date('Y-m-d', strtotime('+6 days',$i)).')</option>';
         }                         
         $isMotor = true;
-        if($request->from!==null && $request->to!==null) {  
-
+        if($request->from!==null && $request->to!==null) 
+        {  
             if($request->unit!==null) {
 
                 if($request->unit!='motor') {
@@ -447,7 +448,9 @@ class DispatchController extends Controller
                 
 		$saveLogs = $this->reportService->create("Weekly", $request);
                 return view('admin.requests.reports.weekly-report',compact('weeks','unit','rs','weeknum','request','fresult','isMotor'));
-            } else {
+            } 
+            else
+            {
                  $result = "
                     select
                         d.tripTicket,
@@ -474,33 +477,36 @@ class DispatchController extends Controller
 
                 $weeknum = $request->weeknum;
                 $saveLogs = $this->reportService->create("Weekly", $request);
-                return view('admin.requests.reports.weekly-report',compact('weeks','unit','rs','weeknum','request','fresult'));
+                return view('admin.requests.reports.weekly-report',compact('weeks','unit','rs','weeknum','request','fresult','isMotor'));
             }
-        } else {
+        } 
+        else 
+        {
             return view('admin.requests.reports.weekly-report',compact('weeks','unit','request','isMotor'));
         }
     }
-        public function daily($dyt = null, Request $request){
-        if(!$dyt)
-        $dyt = date('Y-m-d');
-        $result = "
-        select
-        d.tripTicket,
-        d.type,
-        d.purpose,
-        d.Status,
-        r.refcode,
-        r.date_needed,
-        u.name,
-        u.plateno,
-        d.dateStart from
-        dispatch d left join vehicle_request as r on r.id=d.request_id
-        left join unit u on u.id=d.unitId
-        where
-        d.dateStart>='".$dyt." 00:00:00' and d.dateStart<='".$dyt." 23:59:59'";
-        // dd($result);
-        $rs = DB::select($result);
-        $saveLogs = $this->reportService->create("Daily", $request);
-        return view('admin.requests.reports.daily-report',compact('dyt','rs'));
+        public function daily($dyt = null, Request $request)
+        {
+            if(!$dyt)
+            $dyt = date('Y-m-d');
+            $result = "
+            select
+            d.tripTicket,
+            d.type,
+            d.purpose,
+            d.Status,
+            r.refcode,
+            r.date_needed,
+            u.name,
+            u.plateno,
+            d.dateStart from
+            dispatch d left join vehicle_request as r on r.id=d.request_id
+            left join unit u on u.id=d.unitId
+            where
+            d.dateStart>='".$dyt." 00:00:00' and d.dateStart<='".$dyt." 23:59:59'";
+            // dd($result);
+            $rs = DB::select($result);
+            $saveLogs = $this->reportService->create("Daily", $request);
+            return view('admin.requests.reports.daily-report',compact('dyt','rs'));
         }
 }

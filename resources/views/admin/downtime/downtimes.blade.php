@@ -91,7 +91,8 @@
 
                         </div>
                         <div class="portlet-body">
-                           <div class="table-scrollable">
+                        <br>
+                           
                               <table style="font-size:11px;" class="table table-bordered table-hover" id="sample_4">
                                  <thead>
                                     <tr>
@@ -166,7 +167,7 @@
                                        @endforeach
                                     </tbody>
                               </table>
-                           </div>
+                           
                         </div>
                      </div>
                   </div>

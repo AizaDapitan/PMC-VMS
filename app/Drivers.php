@@ -24,4 +24,3 @@ class Drivers extends Model implements AuditableContract
         'isActive'
     ];
 }
-}
