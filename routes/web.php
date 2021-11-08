@@ -38,9 +38,9 @@ Route::middleware('auth')->group(function () {
         $id = \Auth::user()->id;
 
         return view('auth.passwords.change', compact('id'));
-    });
+    })->name('change-pass');
 
-    Route::patch('/change-password', 'LoginUserController@updatePassword');
+    Route::patch('/change-password', 'LoginUserController@updatePassword')->name('updatePassword');
 
     //Put all forms here  
     Route::get('/home', 'HomeController@index')->name('form.home');
